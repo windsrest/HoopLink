@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<head>
+  <title>대시보드</title>
+</head>
+
+<body>
+<main layout:fragment="content">
+  <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+    <div class="container-xl px-4">
+      <div class="page-header-content pt-4">
+        <div class="row align-items-center justify-content-between">
+          <div class="col-auto mt-4">
+            <h1 class="page-header-title">
+              <div class="page-header-icon"><i data-feather="activity"></i></div>
+              대시보드
+            </h1>
+            <div class="page-header-subtitle">시스템 현황 및 통계 정보</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container-xl px-4 mt-n10">
+    <!-- Stats cards -->
+    <div class="row">
+      <div class="col-lg-6 col-xl-3 mb-4">
+        <div class="card bg-primary text-white h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="me-3">
+                <div class="text-white-75 small">전체 회원수</div>
+                <div class="text-lg fw-bold" th:text="${totalUsers}">1,482</div>
+              </div>
+              <i class="feather-xl text-white-50" data-feather="users"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-xl-3 mb-4">
+        <div class="card bg-warning text-white h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="me-3">
+                <div class="text-white-75 small">오늘 방문자</div>
+                <div class="text-lg fw-bold" th:text="${todayVisitors}">247</div>
+              </div>
+              <i class="feather-xl text-white-50" data-feather="activity"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 추가 카드들... -->
+    </div>
+
+    <!-- Charts row -->
+    <div class="row">
+      <div class="col-xl-6 mb-4">
+        <div class="card card-header-actions h-100">
+          <div class="card-header">
+            방문자 통계
+            <div class="dropdown no-caret">
+              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="areaChartDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="text-gray-500" data-feather="more-vertical"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end animated--fade-in-up">
+                <a class="dropdown-item" href="#!">최근 7일</a>
+                <a class="dropdown-item" href="#!">최근 30일</a>
+                <a class="dropdown-item" href="#!">최근 90일</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-area"><canvas id="myAreaChart" width="100%" height="30"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 mb-4">
+        <div class="card card-header-actions h-100">
+          <div class="card-header">
+            게시판 현황
+            <div class="dropdown no-caret">
+              <button class="btn btn-transparent-dark btn-icon dropdown-toggle" id="pieChartDropdown" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="text-gray-500" data-feather="more-vertical"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end animated--fade-in-up">
+                <a class="dropdown-item" href="#!">다운로드</a>
+                <a class="dropdown-item" href="#!">상세보기</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-pie mb-4"><canvas id="myPieChart" width="100%" height="30"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<th:block layout:fragment="script">
+  <!-- Page level custom scripts -->
+  <script th:src="@{/js/demo/chart-area-demo.js}"></script>
+  <script th:src="@{/js/demo/chart-pie-demo.js}"></script>
+  <script>
+    // Initialize charts after DOM content is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Chart initialization code here if needed
+    });
+  </script>
+</th:block>
+</body>
+</html>

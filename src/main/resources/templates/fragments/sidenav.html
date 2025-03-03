@@ -1,0 +1,89 @@
+<nav th:fragment="sidenav" class="sidenav shadow-right sidenav-light">
+  <div class="sidenav-menu">
+    <div class="nav accordion" id="accordionSidenav">
+      <!-- Core -->
+      <div class="sidenav-menu-heading">Core</div>
+      <a class="nav-link" th:href="@{/dashboard}">
+        <div class="nav-link-icon">
+          <i data-feather="activity"></i>
+        </div>
+        대시보드
+      </a>
+
+      <!-- 사용자 관리 -->
+      <div class="sidenav-menu-heading">사용자 관리</div>
+      <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+         data-bs-target="#collapseUsers" aria-expanded="false" aria-controls="collapseUsers">
+        <div class="nav-link-icon">
+          <i data-feather="users"></i>
+        </div>
+        사용자
+        <div class="sidenav-collapse-arrow">
+          <i class="fas fa-angle-down"></i>
+        </div>
+      </a>
+      <div class="collapse" id="collapseUsers" data-bs-parent="#accordionSidenav">
+        <nav class="sidenav-menu-nested nav">
+          <a class="nav-link" th:href="@{/users/list}">
+            <div class="nav-link-icon">
+              <i data-feather="list"></i>
+            </div>
+            사용자 목록
+          </a>
+          <a class="nav-link" th:href="@{/users/roles}">
+            <div class="nav-link-icon">
+              <i data-feather="shield"></i>
+            </div>
+            권한 관리
+          </a>
+        </nav>
+      </div>
+
+      <!-- 게시판 관리 -->
+      <div class="sidenav-menu-heading">게시판 관리</div>
+      <a class="nav-link collapsed" href="javascript:void(0);" data-bs-toggle="collapse"
+         data-bs-target="#collapseBoards" aria-expanded="false" aria-controls="collapseBoards">
+        <div class="nav-link-icon">
+          <i data-feather="file-text"></i>
+        </div>
+        게시판
+        <div class="sidenav-collapse-arrow">
+          <i class="fas fa-angle-down"></i>
+        </div>
+      </a>
+      <div class="collapse" id="collapseBoards" data-bs-parent="#accordionSidenav">
+        <nav class="sidenav-menu-nested nav">
+          <a class="nav-link" th:href="@{/boards/notice}">
+            <div class="nav-link-icon">
+              <i data-feather="bell"></i>
+            </div>
+            공지사항
+          </a>
+          <a class="nav-link" th:href="@{/boards/free}">
+            <div class="nav-link-icon">
+              <i data-feather="message-square"></i>
+            </div>
+            자유게시판
+          </a>
+        </nav>
+      </div>
+
+      <!-- 설정 -->
+      <div class="sidenav-menu-heading">설정</div>
+      <a class="nav-link" th:href="@{/settings}">
+        <div class="nav-link-icon">
+          <i data-feather="settings"></i>
+        </div>
+        환경설정
+      </a>
+    </div>
+  </div>
+
+  <!-- Sidenav Footer -->
+  <div class="sidenav-footer">
+    <div class="sidenav-footer-content">
+      <div class="sidenav-footer-subtitle">접속계정:</div>
+      <div class="sidenav-footer-title">관리자</div>
+    </div>
+  </div>
+</nav>

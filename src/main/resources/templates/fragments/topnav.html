@@ -1,0 +1,31 @@
+<nav th:fragment="topnav" class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
+  <!-- Navbar Brand -->
+  <a class="navbar-brand pe-3 ps-4 ps-lg-2" th:href="@{/}">
+    <i data-feather="box" class="me-2"></i>
+    HoopLink - SUNS
+  </a>
+
+  <!-- Sidebar Toggle Button -->
+  <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 me-2" id="sidebarToggle">
+    <i data-feather="menu"></i>
+  </button>
+
+  <!-- Navbar Search Input -->
+  <form class="form-inline me-auto d-none d-lg-block me-3">
+    <div class="input-group input-group-joined">
+      <input class="form-control" type="search" placeholder="검색어를 입력하세요..." aria-label="Search" />
+      <span class="input-group-text">
+                <i data-feather="search"></i>
+            </span>
+    </div>
+  </form>
+
+  <!-- Navbar Items -->
+  <ul class="navbar-nav align-items-center ms-auto">
+    <!-- Messages Dropdown -->
+    <li th:replace="fragments/messages :: messages"></li>
+
+    <!-- User Dropdown -->
+    <li th:replace="fragments/user :: user"></li>
+  </ul>
+</nav>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<head>
+    <title>선수 목록</title>
+    <!-- Simple DataTables CSS (기본 스타일만) -->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+</head>
+
+<body>
+<div layout:fragment="content">
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">선수 목록</h1>
+        <a th:href="@{/players/register}" class="btn btn-primary btn-sm shadow-sm">
+            <i class="fas fa-plus fa-sm text-white-50 mr-1"></i>선수 등록
+        </a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-xl-12 col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">선수 정보</h6>
+                </div>
+                <div class="card-body">
+                    <table id="playerTable" class="dataTable-table">
+                        <thead>
+                        <tr>
+                            <th>등번호</th>
+                            <th>이름</th>
+                            <th>생년월일</th>
+                            <th>포지션</th>
+                            <th>키/몸무게</th>
+                            <th>연락처</th>
+                            <th>관리</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="player : ${players}">
+                            <td th:text="${player.uniformNumber}">00</td>
+                            <td>
+                                <span th:text="${player.name}">홍길동</span>
+                            </td>
+                            <td th:text="${#temporals.format(player.birthDate, 'yyyy-MM-dd')}">2000-01-01</td>
+                            <td>
+                                        <span th:each="position, iterStat : ${player.positions}">
+                                            <span th:text="${position.displayName}"></span>
+                                            <span th:if="${!iterStat.last}">, </span>
+                                        </span>
+                            </td>
+                            <td th:text="|${player.height}cm / ${player.weight}kg|">180cm / 80kg</td>
+                            <td th:text="${player.phoneNumber}">010-1234-5678</td>
+                            <td>
+                                <a th:href="@{'/players/edit/' + ${player.idx}}"
+                                   class="btn btn-info btn-sm">
+                                    <i class="fas fa-edit fa-sm"></i>
+                                </a>
+                                <button type="button"
+                                        class="btn btn-danger btn-sm"
+                                        th:onclick="'deletePlayer(' + ${player.idx} + ')'">
+                                    <i class="fas fa-trash fa-sm"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page level scripts -->
+<th:block layout:fragment="script">
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', event => {
+            const datatablesSimple = document.getElementById('playerTable');
+            if (datatablesSimple) {
+                new simpleDatatables.DataTable(datatablesSimple, {
+                    searchable: true,
+                    perPage: 10,
+                    labels: {
+                        placeholder: "검색...",
+                        perPage: "{select} 개씩 보기",
+                        noRows: "데이터가 없습니다",
+                        info: "전체 {rows}개 중 {start}~{end}번째 데이터",
+                        noResults: "검색 결과가 없습니다"
+                    }
+                });
+            }
+        });
+
+        function deletePlayer(idx) {
+            if (confirm('정말 삭제하시겠습니까?')) {
+                fetch(`/players/${idx}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        } else {
+                            alert('삭제 중 오류가 발생했습니다.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('삭제 중 오류가 발생했습니다.');
+                    });
+            }
+        }
+    </script>
+</th:block>
+</body>
+</html>

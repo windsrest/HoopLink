@@ -1,0 +1,29 @@
+<li th:fragment="messages" class="nav-item dropdown no-caret me-3">
+  <a class="nav-link dropdown-toggle" id="navbarDropdownMessages" href="javascript:void(0);" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-envelope fa-fw"></i>
+    <span class="badge bg-danger">4</span>
+  </a>
+  <div class="dropdown-menu dropdown-menu-end border-0 shadow animated--fade-in-up" aria-labelledby="navbarDropdownMessages">
+    <h6 class="dropdown-header dropdown-notifications-header">
+      <i class="fas fa-envelope me-2"></i>
+      메시지 센터
+    </h6>
+    <!-- Message Example-->
+    <a class="dropdown-item dropdown-notifications-item" href="#!">
+      <img class="dropdown-notifications-item-img" th:src="@{/assets/img/illustrations/profiles/profile-2.png}" />
+      <div class="dropdown-notifications-item-content">
+        <div class="dropdown-notifications-item-content-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</div>
+        <div class="dropdown-notifications-item-content-details">김영희 · 58m</div>
+      </div>
+    </a>
+    <!-- Message Example-->
+    <a class="dropdown-item dropdown-notifications-item" href="#!">
+      <img class="dropdown-notifications-item-img" th:src="@{/assets/img/illustrations/profiles/profile-3.png}" />
+      <div class="dropdown-notifications-item-content">
+        <div class="dropdown-notifications-item-content-text">새로운 프로젝트 요청이 있습니다.</div>
+        <div class="dropdown-notifications-item-content-details">이철수 · 2h</div>
+      </div>
+    </a>
+    <a class="dropdown-item dropdown-notifications-footer" href="#!">모든 메시지 읽기</a>
+  </div>
+</li>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head th:replace="fragments/head :: head"></head>
+
+<body class="nav-fixed">
+<!-- Top Navigation -->
+<nav th:replace="fragments/topnav :: topnav"></nav>
+
+<!-- Layout wrapper -->
+<div id="layoutSidenav">
+    <!-- Sidebar Navigation -->
+    <div id="layoutSidenav_nav">
+        <nav th:replace="fragments/sidenav :: sidenav"></nav>
+    </div>
+
+    <!-- Main Content -->
+    <div id="layoutSidenav_content">
+        <main>
+            <!-- Content Area -->
+            <div layout:fragment="content">
+                <!-- 페이지별 컨텐츠가 이 곳에 들어갑니다 -->
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer th:replace="fragments/footer :: footer"></footer>
+    </div>
+</div>
+
+<!-- Scripts -->
+<div th:replace="fragments/scripts :: scripts"></div>
+
+<!-- Page specific scripts -->
+<th:block layout:fragment="script"></th:block>
+</body>
+</html>

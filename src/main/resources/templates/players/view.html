@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<head>
+  <title>선수 정보</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+  <!-- Page Heading -->
+  <header class="page-header page-header-compact page-header-light border-bottom bg-white mb-4">
+    <div class="container-xl px-4">
+      <div class="page-header-content">
+        <div class="row align-items-center justify-content-between pt-3">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">선수 정보</h1>
+            <div>
+              <a th:href="@{'/players/edit/' + ${player.idx}}" class="btn btn-primary btn-sm shadow-sm mr-2">
+                <i class="fas fa-edit fa-sm text-white-50 mr-1"></i>수정
+              </a>
+              <a th:href="@{/players}" class="btn btn-secondary btn-sm shadow-sm">
+                <i class="fas fa-arrow-left fa-sm text-white-50 mr-1"></i>목록
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Row -->
+  <div class="row container-xl px-4 mt-4">
+    <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">선수 상세정보</h6>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4 text-center mb-4">
+              <div class="profile-img mb-3">
+                <div th:if="${player.profileImagePath}" class="mb-3">
+                  <img class="img-fluid rounded-circle" style="width: 200px; height: 200px; object-fit: cover;"
+                       th:src="@{'/uploads/' + ${player.profileImagePath}}" alt="프로필 이미지">
+                </div>
+                <div th:unless="${player.profileImagePath}" class="mb-3">
+                  <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                       style="width: 200px; height: 200px;">
+                    <i class="fas fa-user fa-5x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="uniform-number">
+                                <span class="badge bg-primary rounded-pill fs-5 px-4 py-2">
+                                    <span th:text="${player.uniformNumber}">00</span>
+                                </span>
+              </div>
+            </div>
+
+            <div class="col-md-8">
+              <div class="player-info">
+                <h2 class="font-weight-bold" th:text="${player.name}">선수명</h2>
+
+                <table class="table table-borderless mt-4">
+                  <tbody>
+                  <tr>
+                    <th scope="row" style="width: 30%">아이디</th>
+                    <td th:text="${player.loginId}">player123</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">생년월일</th>
+                    <td th:text="${#temporals.format(player.birthDate, 'yyyy년 MM월 dd일')}">1990년 01월 01일</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">포지션</th>
+                    <td>
+                                                <span th:each="position, iterStat : ${player.positions}" class="badge bg-info mr-1">
+                                                    <span th:text="${position.displayName}">포지션</span>
+                                                </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">키</th>
+                    <td>
+                      <span th:if="${player.height}" th:text="${player.height} + ' cm'">180 cm</span>
+                      <span th:unless="${player.height}">-</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">몸무게</th>
+                    <td>
+                      <span th:if="${player.weight}" th:text="${player.weight} + ' kg'">80 kg</span>
+                      <span th:unless="${player.weight}">-</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">연락처</th>
+                    <td th:text="${player.phoneNumber}">010-1234-5678</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page level scripts -->
+<th:block layout:fragment="script">
+  <script>
+    $(document).ready(function() {
+      // 추가적인 JavaScript가 필요한 경우 이곳에 작성
+    });
+  </script>
+</th:block>
+</body>
+</html>

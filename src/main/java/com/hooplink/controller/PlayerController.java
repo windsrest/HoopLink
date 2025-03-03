@@ -9,10 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +30,13 @@ public class PlayerController {
         List<Player> players = playerService.getAllPlayers();
         model.addAttribute("players", players);
         return "players/list";  // list.html 뷰를 찾음
+    }
+
+    @GetMapping("/{idx}")
+    public String view(@PathVariable Long idx, Model model) {
+        Player player = playerService.getPlayer(idx);
+        model.addAttribute("player", player);
+        return "players/view";  // view.html 뷰를 찾음
     }
 
     @PostMapping

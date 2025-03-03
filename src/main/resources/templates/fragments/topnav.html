@@ -23,9 +23,9 @@
   <!-- Navbar Items -->
   <ul class="navbar-nav align-items-center ms-auto">
     <!-- Messages Dropdown -->
-    <li th:replace="fragments/messages :: messages"></li>
+    <li th:replace="~{fragments/messages :: messages}"></li>
 
     <!-- User Dropdown -->
-    <li th:replace="fragments/user :: user"></li>
+    <li th:replace="~{fragments/user :: user}"></li>
   </ul>
 </nav>

@@ -3,17 +3,17 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<head th:replace="fragments/head :: head"></head>
+<head th:replace="~{fragments/head :: head}"></head>
 
 <body class="nav-fixed">
 <!-- Top Navigation -->
-<nav th:replace="fragments/topnav :: topnav"></nav>
+<nav th:replace="~{fragments/topnav :: topnav}"></nav>
 
 <!-- Layout wrapper -->
 <div id="layoutSidenav">
     <!-- Sidebar Navigation -->
     <div id="layoutSidenav_nav">
-        <nav th:replace="fragments/sidenav :: sidenav"></nav>
+        <nav th:replace="~{fragments/sidenav :: sidenav}"></nav>
     </div>
 
     <!-- Main Content -->
@@ -26,12 +26,12 @@
         </main>
 
         <!-- Footer -->
-        <footer th:replace="fragments/footer :: footer"></footer>
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
     </div>
 </div>
 
 <!-- Scripts -->
-<div th:replace="fragments/scripts :: scripts"></div>
+<div th:replace="~{fragments/scripts :: scripts}"></div>
 
 <!-- Page specific scripts -->
 <th:block layout:fragment="script"></th:block>
